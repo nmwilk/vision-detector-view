@@ -1,1 +1,1 @@
-include ':app', ':vision-detector-view'
+include ':sample', ':vision-detector-view'
