@@ -1,3 +1,18 @@
 <resources>
     <string name="app_name">VisionView</string>
+
+    <string name="ocr">OCR</string>
+    <string name="barcode">Barcode</string>
+    <string name="autofocus">Auto-focus</string>
+    <string name="flash">Flash</string>
+    <string name="start">Start Capture</string>
+    <string name="camera_options">Camera Options</string>
+    <string name="detection">Detection</string>
+    <string name="take_picture">Take Picture</string>
+    <string name="picture_taken">Picture Taken</string>
+    <string name="ok">OK</string>
+    <string name="permission_camera_rationale">Access to the camera is needed for detection</string>
+    <string name="no_camera_permission">This application cannot run because it does not have the camera permission.  The application will now exit.</string>
+    <string name="low_storage_error">Ocr dependencies cannot be downloaded due to low device storage</string>
+    <string name="unknown_error">An unknown error occurred</string>
 </resources>
