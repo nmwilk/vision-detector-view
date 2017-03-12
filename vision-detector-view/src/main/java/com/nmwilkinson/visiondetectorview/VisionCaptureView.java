@@ -1,6 +1,5 @@
 package com.nmwilkinson.visiondetectorview;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -45,38 +44,40 @@ public class VisionCaptureView extends FrameLayout {
         addView(mPreview, new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
     }
 
+    /**
+     * Typically called from Activity.onResume()
+     */
     public void startCapturing() {
-        if (mCameraSource != null) {
-            try {
-                mPreview.start(mCameraSource);
-            } catch (final IOException | SecurityException e) {
-                Log.e(TAG, "Unable to start camera source.", e);
-                mCameraSource.release();
-                mCameraSource = null;
-            }
+        if (mCameraSource == null) {
+            throw new IllegalStateException("You must create a " + CameraSource.class.getSimpleName() + " first via createCameraSource()");
+        }
+
+        try {
+            mPreview.start(mCameraSource);
+        } catch (final IOException | SecurityException e) {
+            Log.e(TAG, "Unable to start camera source.", e);
+            mCameraSource.release();
+            mCameraSource = null;
         }
     }
 
+    /**
+     * Typically called from Activity.onPause()
+     */
     public void stopCapturing() {
         mPreview.stop();
     }
 
+    /**
+     * Typically called from Activity.onDestroy()
+     */
     public void shutdown() {
         mPreview.release();
     }
 
-    @Override
-    public boolean onTouchEvent(final MotionEvent e) {
-        return mScaleGestureDetector.onTouchEvent(e) || super.onTouchEvent(e);
-    }
-
     /**
-     * Creates and starts the camera.
-     * <p>
-     * Suppressing InlinedApi since there is a check that the minimum version is met before using
-     * the constant.
+     * Creates and starts the camera. Call prior to {@link #startCapturing()}.
      */
-    @SuppressLint("InlinedApi")
     public void createCameraSource(final Context appContext, VisionCameraConfig cameraConfig, VisionDetectorConfig detectorConfig) {
         final Detector<?> detector = createDetector(appContext, detectorConfig);
         // Creates and starts the camera.
@@ -87,6 +88,18 @@ public class VisionCaptureView extends FrameLayout {
                 .setFlashMode(cameraConfig.useFlash() ? Camera.Parameters.FLASH_MODE_TORCH : null)
                 .setFocusMode(cameraConfig.autoFocus() ? Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE : null)
                 .build();
+    }
+
+    /**
+     * Takes a picture
+     */
+    public void takePicture(final CameraSource.ShutterCallback shutter, final CameraSource.PictureCallback jpeg) {
+        mCameraSource.takePicture(shutter, jpeg);
+    }
+
+    @Override
+    public boolean onTouchEvent(final MotionEvent e) {
+        return mScaleGestureDetector.onTouchEvent(e) || super.onTouchEvent(e);
     }
 
     private Detector<?> createDetector(Context appContext, VisionDetectorConfig detectorConfig) {
@@ -169,13 +182,6 @@ public class VisionCaptureView extends FrameLayout {
         }
 
         return detector;
-    }
-
-    /**
-     * Takes a picture
-     */
-    public void takePicture(final CameraSource.ShutterCallback shutter, final CameraSource.PictureCallback jpeg) {
-        mCameraSource.takePicture(shutter, jpeg);
     }
 
     private class ScaleListener implements ScaleGestureDetector.OnScaleGestureListener {
