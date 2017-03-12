@@ -36,6 +36,8 @@ a) You'll need to request the `CAMERA` permission on Android 6 and above prior t
 
 b) The device needs Google Play Services installed to use Google Mobile Vision.
  
+<a href='https://bintray.com/nmwilkinson/maven/vision-detector-view?source=watch' alt='Get automatic notifications about new "vision-detector-view" versions'><img src='https://www.bintray.com/docs/images/bintray_badge_greyscale.png'></a>
+ 
 License
 -------
 Original work Copyright 2015 Google, Inc. All Rights Reserved.
