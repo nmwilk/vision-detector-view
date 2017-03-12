@@ -11,7 +11,16 @@ Usage
 
 Import via Gradle
 
-`compile 'com.nmwilkinson:vision-detector-view:1.0.0'`
+    `compile 'com.nmwilkinson:vision-detector-view:1.0.0'`
+
+For the moment you'll need to the repository (currently waiting on inclusion into jcenter):
+
+    repositories {
+        maven {
+            url  "http://dl.bintray.com/nmwilkinson/maven"
+        }
+        // ... others
+    }
 
 1) Add a `VisionDetectorView` to your layout.
 
