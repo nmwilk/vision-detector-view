@@ -11,7 +11,7 @@ Usage
 
 Import via Gradle
 
-    `compile 'com.nmwilkinson:vision-detector-view:1.0.1'`
+    compile 'com.nmwilkinson:vision-detector-view:1.0.1'
 
 For the moment you'll need to the repository (currently waiting on inclusion into jcenter):
 
@@ -24,9 +24,11 @@ For the moment you'll need to the repository (currently waiting on inclusion int
 
 1) Add a `VisionDetectorView` to your layout.
 
-2) Configure it by calling `createCameraSource()` supplying a `VisionCameraConfig` and `VisionCaptureConfig`.
+2) Configure it by calling `createCameraSource()`, supplying a `VisionCameraConfig` and `VisionCaptureConfig`.
 
-3) Start, stop, and destroy the session in your `Activity`'s `onResume()`, `onPause()`, and `onDestroy()` respectively.
+3) Receive detections via the `Detector.Processor` specified in your `VisionCaptureConfig`.
+
+4) Start, stop, and destroy the session in your `Activity`'s `onResume()`, `onPause()`, and `onDestroy()` respectively.
 
 Notes
 -----
