@@ -9,7 +9,7 @@
     <string name="camera_options">Camera Options</string>
     <string name="detection">Detection</string>
     <string name="take_picture">Take Picture</string>
-    <string name="picture_taken">Picture Taken</string>
+    <string name="picture_taken">Picture taken</string>
     <string name="ok">OK</string>
     <string name="permission_camera_rationale">Access to the camera is needed for detection</string>
     <string name="no_camera_permission">This application cannot run because it does not have the camera permission.  The application will now exit.</string>
