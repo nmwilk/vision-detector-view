@@ -17,8 +17,8 @@ import com.google.android.gms.common.GoogleApiAvailability
 import com.google.android.gms.vision.Detector
 import com.google.android.gms.vision.barcode.Barcode
 import com.google.android.gms.vision.text.TextBlock
-import com.nmwilkinson.vision_detector_view.VisionCameraConfig
-import com.nmwilkinson.vision_detector_view.VisionDetectorConfig
+import com.nmwilkinson.visiondetectorview.VisionCameraConfig
+import com.nmwilkinson.visiondetectorview.VisionDetectorConfig
 import kotlinx.android.synthetic.main.activity_capture.*
 
 class CaptureActivity : AppCompatActivity(), VisionDetectorConfig.ErrorCallback {

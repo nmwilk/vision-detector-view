@@ -1,4 +1,4 @@
-package com.nmwilkinson.vision_detector_view;
+package com.nmwilkinson.visiondetectorview;
 
 import com.google.android.gms.samples.vision.ocrreader.camera.CameraSource;
 import com.google.android.gms.vision.Detector;

@@ -1,4 +1,4 @@
-package com.nmwilkinson.vision_detector_view;
+package com.nmwilkinson.visiondetectorview;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -24,7 +24,7 @@ import com.google.android.gms.vision.text.TextRecognizer;
 
 import java.io.IOException;
 
-import static com.nmwilkinson.vision_detector_view.VisionDetectorConfig.ErrorCallback.ERROR_DEPENDENCIES_NOT_DOWNLOADED;
+import static com.nmwilkinson.visiondetectorview.VisionDetectorConfig.ErrorCallback.ERROR_DEPENDENCIES_NOT_DOWNLOADED;
 
 /**
  * Code taken from OcrCaptureActivity from https://github.com/googlesamples/android-vision.git, put into a View, overlay removed, and easier support for different detection types.

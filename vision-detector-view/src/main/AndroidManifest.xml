@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
 
-    package="com.nmwilkinson.vision_detector_view">
+    package="com.nmwilkinson.visiondetectorview">
 
     <uses-permission android:name="android.permission.CAMERA" />
 

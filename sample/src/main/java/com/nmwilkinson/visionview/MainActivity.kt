@@ -2,8 +2,8 @@ package com.nmwilkinson.visionview
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import com.nmwilkinson.vision_detector_view.VisionDetectorConfig.DetectorType.BARCODE
-import com.nmwilkinson.vision_detector_view.VisionDetectorConfig.DetectorType.OCR
+import com.nmwilkinson.visiondetectorview.VisionDetectorConfig.DetectorType.BARCODE
+import com.nmwilkinson.visiondetectorview.VisionDetectorConfig.DetectorType.OCR
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
