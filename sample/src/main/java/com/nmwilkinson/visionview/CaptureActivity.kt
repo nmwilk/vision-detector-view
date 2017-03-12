@@ -73,7 +73,7 @@ class CaptureActivity : AppCompatActivity(), VisionDetectorConfig.ErrorCallback 
     private val ocrProcessor = object : Detector.Processor<TextBlock> {
         override fun receiveDetections(detections: Detector.Detections<TextBlock>?) {
             detections?.let {
-                for (i in 0..it.detectedItems.size()) {
+                for (i in 0 until it.detectedItems.size()) {
                     addToResults(it.detectedItems.valueAt(i).value, 10)
                 }
             }
@@ -86,7 +86,7 @@ class CaptureActivity : AppCompatActivity(), VisionDetectorConfig.ErrorCallback 
     private val barcodeProcessor = object : Detector.Processor<Barcode> {
         override fun receiveDetections(detections: Detector.Detections<Barcode>?) {
             detections?.let {
-                for (i in 0..it.detectedItems.size()) {
+                for (i in 0 until it.detectedItems.size()) {
                     addToResults(it.detectedItems.valueAt(i).displayValue, 1)
                 }
             }
