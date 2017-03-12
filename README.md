@@ -11,7 +11,7 @@ Usage
 
 Import via Gradle
 
-    `compile 'com.nmwilkinson:vision-detector-view:1.0.0'`
+    `compile 'com.nmwilkinson:vision-detector-view:1.0.1'`
 
 For the moment you'll need to the repository (currently waiting on inclusion into jcenter):
 
