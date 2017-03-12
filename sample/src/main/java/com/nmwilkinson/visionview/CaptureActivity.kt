@@ -12,7 +12,6 @@ import android.support.design.widget.Snackbar
 import android.support.v4.app.ActivityCompat
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
-import android.widget.Toast
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.GoogleApiAvailability
 import com.google.android.gms.vision.Detector
@@ -43,23 +42,32 @@ class CaptureActivity : AppCompatActivity(), VisionDetectorConfig.ErrorCallback 
                 Snackbar.make(rootLayout, message, Snackbar.LENGTH_SHORT).show()
             })
         }
+    }
 
-        captureViewConfig = VisionCameraConfig.Builder()
-                .setAutoFocus(intent.getBooleanExtra(OPTION_AUTOFOCUS, true))
-                .setUseFlash(intent.getBooleanExtra(OPTION_FLASH, true))
-                .setFps(2.0f)
-                .build()
+    override fun onWindowFocusChanged(hasFocus: Boolean) {
+        super.onWindowFocusChanged(hasFocus)
 
-        // Check for the camera permission before accessing the camera.  If the
-        // permission is not granted yet, request permission.
-        val rc = ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
-        if (rc == PackageManager.PERMISSION_GRANTED) {
-            capture.createCameraSource(applicationContext, captureViewConfig, createDetectorConfig())
+        if (hasFocus) {
+            captureViewConfig = VisionCameraConfig.Builder()
+                    .setAutoFocus(intent.getBooleanExtra(OPTION_AUTOFOCUS, true))
+                    .setUseFlash(intent.getBooleanExtra(OPTION_FLASH, true))
+                    .setCaptureWidth(capture.width)
+                    .setCaptureHeight(capture.height)
+                    .setFps(2.0f)
+                    .build()
+
+            // Check for the camera permission before accessing the camera.  If the
+            // permission is not granted yet, request permission.
+            val rc = ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
+            if (rc == PackageManager.PERMISSION_GRANTED) {
+                capture.createCameraSource(applicationContext, captureViewConfig, createDetectorConfig())
+                startCameraSource()
+            } else {
+                requestCameraPermission()
+            }
         } else {
-            requestCameraPermission()
+            capture.stopCapturing()
         }
-
-        Toast.makeText(this, "VisionCaptureView version ${com.nmwilkinson.visiondetectorview.BuildConfig.VERSION_NAME}", Toast.LENGTH_SHORT).show()
     }
 
     private val ocrProcessor = object : Detector.Processor<TextBlock> {
@@ -113,16 +121,6 @@ class CaptureActivity : AppCompatActivity(), VisionDetectorConfig.ErrorCallback 
     }
 
     private fun getDetectorType() = VisionDetectorConfig.DetectorType.values()[intent.getIntExtra(OPTION_MODE, 0)]
-
-    override fun onResume() {
-        super.onResume()
-        startCameraSource()
-    }
-
-    override fun onPause() {
-        super.onPause()
-        capture.stopCapturing()
-    }
 
     override fun onDestroy() {
         super.onDestroy()

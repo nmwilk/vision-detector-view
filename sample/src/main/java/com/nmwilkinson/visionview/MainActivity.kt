@@ -2,6 +2,7 @@ package com.nmwilkinson.visionview
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.widget.Toast
 import com.nmwilkinson.visiondetectorview.VisionDetectorConfig.DetectorType.BARCODE
 import com.nmwilkinson.visiondetectorview.VisionDetectorConfig.DetectorType.OCR
 import kotlinx.android.synthetic.main.activity_main.*
@@ -24,5 +25,7 @@ class MainActivity : AppCompatActivity() {
             val mode = if (ocr.isChecked) OCR else BARCODE
             startActivity(CaptureActivity.launchIntent(this, mode, autofocus.isChecked, flash.isChecked))
         }
+
+        Toast.makeText(this, "VisionCaptureView version ${com.nmwilkinson.visiondetectorview.BuildConfig.VERSION_NAME}", Toast.LENGTH_SHORT).show()
     }
 }
