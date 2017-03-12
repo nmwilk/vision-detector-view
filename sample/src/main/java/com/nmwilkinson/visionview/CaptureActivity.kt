@@ -12,6 +12,7 @@ import android.support.design.widget.Snackbar
 import android.support.v4.app.ActivityCompat
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
+import android.widget.Toast
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.GoogleApiAvailability
 import com.google.android.gms.vision.Detector
@@ -57,6 +58,8 @@ class CaptureActivity : AppCompatActivity(), VisionDetectorConfig.ErrorCallback 
         } else {
             requestCameraPermission()
         }
+
+        Toast.makeText(this, "VisionCaptureView version ${com.nmwilkinson.visiondetectorview.BuildConfig.VERSION_NAME}", Toast.LENGTH_SHORT).show()
     }
 
     private val ocrProcessor = object : Detector.Processor<TextBlock> {
