@@ -7,6 +7,7 @@ import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.os.Handler
 import android.support.design.widget.Snackbar
 import android.support.v4.app.ActivityCompat
 import android.support.v7.app.AppCompatActivity
@@ -24,6 +25,10 @@ class CaptureActivity : AppCompatActivity(), VisionDetectorConfig.ErrorCallback 
 
     private lateinit var captureViewConfig: VisionCameraConfig
 
+    private val detectionSet = HashMap<String, Int>()
+
+    private val handler = Handler()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_capture)
@@ -32,8 +37,8 @@ class CaptureActivity : AppCompatActivity(), VisionDetectorConfig.ErrorCallback 
 
         takePicture.setOnClickListener {
             capture.takePicture({
-            }, {
-                val message = "${resources.getString(R.string.picture_taken)} of size ${it.size / 1024}KB"
+            }, { imageData ->
+                val message = "${resources.getString(R.string.picture_taken)} of size ${imageData.size / 1024}KB"
                 Snackbar.make(rootLayout, message, Snackbar.LENGTH_SHORT).show()
             })
         }
@@ -56,17 +61,44 @@ class CaptureActivity : AppCompatActivity(), VisionDetectorConfig.ErrorCallback 
 
     private val ocrProcessor = object : Detector.Processor<TextBlock> {
         override fun receiveDetections(detections: Detector.Detections<TextBlock>?) {
+            detections?.let {
+                for (i in 0..it.detectedItems.size()) {
+                    addToResults(it.detectedItems.valueAt(i).value, 10)
+                }
+            }
         }
 
         override fun release() {
         }
     }
+
     private val barcodeProcessor = object : Detector.Processor<Barcode> {
         override fun receiveDetections(detections: Detector.Detections<Barcode>?) {
+            detections?.let {
+                for (i in 0..it.detectedItems.size()) {
+                    addToResults(it.detectedItems.valueAt(i).displayValue, 1)
+                }
+            }
         }
 
         override fun release() {
         }
+    }
+
+    private fun addToResults(text: String, maxResults: Int) {
+        val count = detectionSet[text] ?: 0
+        detectionSet[text] = count + 1
+        updateResultsView(maxResults)
+    }
+
+    /* show the top 10 most detected strings */
+    private fun updateResultsView(maxResults: Int) {
+        val concatedValues = detectionSet.keys.sortedByDescending { detectionSet[it] }.take(maxResults).fold(StringBuffer()) {
+            buffer, value ->
+            buffer.append("$value ")
+            buffer
+        }
+        handler.post { results.text = concatedValues.toString() }
     }
 
     private fun createDetectorConfig(): VisionDetectorConfig {
