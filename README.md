@@ -1,4 +1,4 @@
-# vision-view
+# Vision Detector View
 
 Based on https://github.com/googlesamples/android-vision
 
