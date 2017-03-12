@@ -13,7 +13,7 @@ Import via Gradle
 
 `compile 'com.nmwilkinson:vision-detector-view:1.0.0'`
 
-1) Add a VisionDetectorView to your layout.
+1) Add a `VisionDetectorView` to your layout.
 
 2) Configure it by calling `createCameraSource()` supplying a `VisionCameraConfig` and `VisionCaptureConfig`.
 
