@@ -91,7 +91,7 @@ class CaptureActivity : AppCompatActivity(), VisionDetectorConfig.ErrorCallback 
         updateResultsView(maxResults)
     }
 
-    /* show the top 10 most detected strings */
+    /* show the top n most detected strings */
     private fun updateResultsView(maxResults: Int) {
         val concatedValues = detectionSet.keys.sortedByDescending { detectionSet[it] }.take(maxResults).fold(StringBuffer()) {
             buffer, value ->
