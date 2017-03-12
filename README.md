@@ -37,6 +37,7 @@ b) The device needs Google Play Services installed to use Google Mobile Vision.
 License
 -------
 Original work Copyright 2015 Google, Inc. All Rights Reserved.
+
 Modified work Copyright 2017 Neil Wilkinson.
 
 Licensed to the Apache Software Foundation (ASF) under one or more contributor
