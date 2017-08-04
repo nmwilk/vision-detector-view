@@ -171,7 +171,7 @@ class CaptureActivity : AppCompatActivity(), VisionDetectorConfig.ErrorCallback 
 
         Log.e(TAG, "Permission not granted: results len = ${grantResults.size} Result code = " + if (grantResults.isNotEmpty()) grantResults[0] else "(empty)")
 
-        val listener = DialogInterface.OnClickListener { dialog, int -> finish() }
+        val listener = DialogInterface.OnClickListener { _, _ -> finish() }
 
         val builder = AlertDialog.Builder(this)
         builder.setTitle(resources.getString(R.string.app_name))
